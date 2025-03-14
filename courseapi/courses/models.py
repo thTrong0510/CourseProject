@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
-# Create your models here.
 
 #ke thua User mac dinh
 class User(AbstractUser):
@@ -39,6 +38,15 @@ class Lesson(BaseModel):
     content = RichTextField
     image = models.ImageField(upload_to='lesson/%Y/%M')
     courses = models.ForeignKey(Course, on_delete=models.CASCADE)
+    tags = models.ManyToManyField('Tag')
+
 
     def __str__(self):
         return self.subject
+
+
+class Tag(BaseModel):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
