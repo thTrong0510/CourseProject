@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'rest_framework',
     'drf_yasg',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,11 @@ ROOT_URLCONF = 'courseapi.urls'
 #cau hinh duong dan tuyet doi: BASE_DIR/courses/static/ voi BASE_DIR cau hinh dau file
 MEDIA_ROOT = '%s/courses/static/' % BASE_DIR
 CKEDITOR_UPLOAD_PATH = "ckeditor/lessons/"
+
+#oauth2 cau hinh
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('oauth2_provider.contrib.rest_framework.OAuth2Authentication',)
+}
 
 TEMPLATES = [
     {
@@ -139,3 +145,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#oauth2
+CLIENT_ID = 'rnp0MUfEibQUzsiREBxAPyJLKJBneO5jsEkgrxeL'
+CLIENT_SECRET = 'm8sqBOTvbHonM01BZVlaw76qBRW4HXvnSwsZl5GDthgQ8EiHGjkCDQ7yrD6rAGWkYYej34xK21UPEqg0tAi6KNFJlFc8uMVsyg20qqELbX9VeODIvtHz9et6yAr7SYlv'
+
+#config khi login = oauth2 pải gửi lên JSON chứ k đc dùng form-data
+OAUTH2_PROVIDER = { 'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore' }
